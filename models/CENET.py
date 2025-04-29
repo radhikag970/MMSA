@@ -11,7 +11,8 @@ from torch.nn import CrossEntropyLoss, MSELoss
 # from pytorch_transformers import BertConfig
 # from pytorch_transformers.modeling_utils import PreTrainedModel, prune_linear_layer
 # from pytorch_transformers import BERT_PRETRAINED_MODEL_ARCHIVE_MAP
-from transformers import BertConfig, PreTrainedModel, BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+from transformers import BertConfig, PreTrainedModel
+# , BERT_PRETRAINED_MODEL_ARCHIVE_MAP
 from torch.nn import LayerNorm as BertLayerNorm
 
 def gelu(x):
@@ -356,7 +357,7 @@ class BertPreTrainedModel(PreTrainedModel):
         a simple interface for dowloading and loading pretrained models.
     """
     config_class = BertConfig
-    pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+    # pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "bert"
 
     def _init_weights(self, module):
@@ -445,7 +446,7 @@ class BertClassificationHead(nn.Module):
 
 class CENET(BertPreTrainedModel):
     config_class = BertConfig
-    pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+    # pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "bert"
     def __init__(self,config, pos_tag_embedding=False, senti_embedding=False, polarity_embedding=False,args= None):
         super(CENET, self).__init__(config)
