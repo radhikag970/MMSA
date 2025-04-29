@@ -13,7 +13,7 @@ import pandas as pd
 import torch
 from easydict import EasyDict as edict
 
-from config import get_config_regression
+from config import config_regression
 from data_loader import MMDataLoader
 from models import AMIO
 from trains import ATIO
