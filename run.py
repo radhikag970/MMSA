@@ -17,7 +17,8 @@ from easydict import EasyDict as edict
 
 config_path = Path("config/config_regression.json")
 with open(config_path, "r") as f:
-    get_config_regression = json.load(f)
+    config_regression = json.load(f)
+from config.config_regression import get_config_regression
 
 # from config import config_regression
 from data_loader import MMDataLoader
