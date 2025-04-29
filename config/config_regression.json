@@ -3,7 +3,7 @@
     "dataset_root_dir": "/home/sharing/disk3/Datasets/MMSA-Standard",
     "mosi": {
       "aligned": {
-        "featurePath": "MOSI/Processed/aligned_50.pkl",
+        "featurePath": "mosi_aligned.pkl",
         "seq_lens": [50, 50, 50],
         "feature_dims": [768, 5, 20],
         "train_samples": 1284,
@@ -14,7 +14,7 @@
         "missing_seed": [1111, 1111, 1111]
       },
       "unaligned": {
-        "featurePath": "MOSI/Processed/unaligned_50.pkl",
+        "featurePath": "mosi_unaligned.pkl",
         "seq_lens": [50, 500, 375],
         "feature_dims": [768, 5, 20],
         "train_samples": 1284,

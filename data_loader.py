@@ -27,7 +27,7 @@ class MMDataset(Dataset):
             with open(self.args['custom_feature'], 'rb') as f:
                 data = pickle.load(f)
         else:
-            # use deault feature file specified in config file
+            # use default feature file specified in config file
             with open(self.args['featurePath'], 'rb') as f:
                 data = pickle.load(f)
         
