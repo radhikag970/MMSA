@@ -21,8 +21,6 @@ with open(config_path, "r") as f:
 
 # from config import config_regression
 from data_loader import MMDataLoader
-from models import AMIO
-from trains import ATIO
 from utils import assign_gpu, count_parameters, setup_seed
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
