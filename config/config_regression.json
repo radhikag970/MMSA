@@ -1590,7 +1590,7 @@
       "need_data_aligned": false,
       "need_model_aligned": false,
       "need_normalized": false,
-      "use_bert": true,
+      "use_bert": false,
       "use_finetune": true,
       "early_stop": 8
     },
