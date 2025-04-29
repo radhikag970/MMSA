@@ -24,9 +24,12 @@ ACT2FN = {"gelu": gelu, "relu": torch.nn.functional.relu, "swish": swish}
 class CE(nn.Module):
     def __init__(self, config, args):
         super(CE, self).__init__()
-        TEXT_DIM = args.feature_dims[0]
-        AUDIO_DIM = args.feature_dims[1]
-        VIS_DIM = args.feature_dims[2]
+        # TEXT_DIM = args.feature_dims[0]
+        # AUDIO_DIM = args.feature_dims[1]
+        # VIS_DIM = args.feature_dims[2]
+        TEXT_DIM = args['feature_dims'][0]
+        AUDIO_DIM = args['feature_dims'][1]
+        VIS_DIM = args['feature_dims'][2]
         self.visual_transform = nn.Sequential(
             nn.Linear(VIS_DIM, config.hidden_size),
             nn.ReLU(),
