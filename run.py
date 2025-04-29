@@ -328,7 +328,14 @@ def MMSA_test(
         feature = pickle.load(f)
     args['feature_dims'] = [feature['text'].shape[1], feature['audio'].shape[1], feature['vision'].shape[1]]
     args['seq_lens'] = [feature['text'].shape[0], feature['audio'].shape[0], feature['vision'].shape[0]]
-    model = AMIO(args)
+    # model = AMIO(args)
+    bert_config = BertConfig.from_pretrained(
+        args['pretrained'], 
+        num_labels=1,               # regression
+        output_attentions=False,
+        output_hidden_states=False
+    )
+    model = CENET(config=bert_config, args=args)
     model.load_state_dict(torch.load(weights_path), strict=False)
     model.to(device)
     model.eval()
@@ -653,7 +660,14 @@ if SENA_ENABLED:
         # args['device'] = assign_gpu([])
         args['device'] = 'cpu'
         setup_seed(seed)
-        model = AMIO(args).to(args['device'])
+        bert_config = BertConfig.from_pretrained(
+        args['pretrained'], 
+        num_labels=1,               # regression
+        output_attentions=False,
+        output_hidden_states=False
+        )
+        model = CENET(config=bert_config, args=args).to(args['device'])
+        # model = AMIO(args).to(args['device'])
         model.load_state_dict(torch.load(save_model_path))
         model.to(args['device'])
         with open(feature_file, 'rb') as f:
