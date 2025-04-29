@@ -31,7 +31,7 @@ class CENET:
                 "weight_decay": self.args['weight_decay'],
             },
             {
-                "params": model.Model.bert.encoder.CE.parameters(),
+                "params": model.bert.encoder.CE.parameters(),
                 'lr': self.args['learning_rate'],
                 "weight_decay": self.args['weight_decay'],
             },
