@@ -7,13 +7,19 @@ import pickle
 import random
 import time
 from pathlib import Path
+import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import torch
 from easydict import EasyDict as edict
 
-from config import config_regression
+config_path = Path("config/config_regression.json")
+with open(config_path, "r") as f:
+    config_regression = json.load(f)
+
+# from config import config_regression
 from data_loader import MMDataLoader
 from models import AMIO
 from trains import ATIO
