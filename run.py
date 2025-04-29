@@ -8,12 +8,14 @@ import random
 import time
 import json
 from pathlib import Path
-from .models import AMIO
-from .trains import ATIO
 import numpy as np
 import pandas as pd
 import torch
 from easydict import EasyDict as edict
+from models import CENET
+from transformers import BertConfig
+from trains import CENET as CENETTrainer
+
 
 from config.config_regression import get_config_regression
 
@@ -244,7 +246,13 @@ def MMSA_run(
 def _run(args, num_workers=4, is_tune=False, from_sena=False):
     # load data and models
     dataloader = MMDataLoader(args, num_workers)
-    model = AMIO(args).to(args['device'])
+    bert_config = BertConfig.from_pretrained(
+        args['pretrained'], 
+        num_labels=1,               # regression
+        output_attentions=False,
+        output_hidden_states=False
+    )
+    model = CENET(config=bert_config, args=args).to(args['device'])
 
     logger.info(f'The model has {count_parameters(model)} trainable parameters')
     # TODO: use multiple gpus
@@ -252,7 +260,7 @@ def _run(args, num_workers=4, is_tune=False, from_sena=False):
     #     model = torch.nn.DataParallel(model,
     #                                   device_ids=args.gpu_ids,
     #                                   output_device=args.gpu_ids[0])
-    trainer = ATIO().getTrain(args)
+    trainer =CENETTrainer(args)
     # do train
     # epoch_results = trainer.do_train(model, dataloader)
     epoch_results = trainer.do_train(model, dataloader, return_epoch_results=from_sena)

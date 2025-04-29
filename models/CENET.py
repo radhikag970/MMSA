@@ -8,9 +8,10 @@ import math
 import math
 import sys
 from torch.nn import CrossEntropyLoss, MSELoss
-from pytorch_transformers import BertConfig
-from pytorch_transformers.modeling_utils import PreTrainedModel, prune_linear_layer
-from pytorch_transformers import BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+# from pytorch_transformers import BertConfig
+# from pytorch_transformers.modeling_utils import PreTrainedModel, prune_linear_layer
+# from pytorch_transformers import BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+from transformers import BertConfig, PreTrainedModel, BERT_PRETRAINED_MODEL_ARCHIVE_MAP
 from torch.nn import LayerNorm as BertLayerNorm
 
 def gelu(x):
