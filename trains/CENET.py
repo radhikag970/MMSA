@@ -2,7 +2,7 @@ import logging
 from tqdm import tqdm
 import torch
 import torch.nn as nn
-from ..utils import MetricsTop, dict_to_str
+from utils import MetricsTop, dict_to_str
 from transformers import BertTokenizer
 
 logger = logging.getLogger('MMSA')
