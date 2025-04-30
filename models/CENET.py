@@ -464,7 +464,7 @@ class CENET(BertPreTrainedModel):
         input_ids = text[:,0,:].long()
         attention_mask =text[:,1,:].long()
         token_type_ids = text[:,2,:].long()
-        outputs = self.bert(input_ids,
+        outputs = self.bert(input_ids=input_ids,
                             visual=visual,
                             acoustic=acoustic,
                             visual_ids=visual_ids,
