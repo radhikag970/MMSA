@@ -463,11 +463,9 @@ class CENET(BertPreTrainedModel):
     def forward(self,text, acoustic, visual, visual_ids=None, acoustic_ids=None, pos_tag_ids=None, senti_word_ids=None, polarity_ids= None, position_ids=None, head_mask= None, labels=None):
         input_ids = text[:,0,:].long()
         input_ids = torch.clamp(input_ids, min=0)
-        print("Input IDs:", input_ids)
-        print("Min value in input_ids:", input_ids.min().item())
-        print("Max value in input_ids:", input_ids.max().item())
         attention_mask =text[:,1,:].long()
         token_type_ids = text[:,2,:].long()
+        Print("Position IDs:", position_ids)
         outputs = self.bert(input_ids=input_ids,
                             visual=visual,
                             acoustic=acoustic,
