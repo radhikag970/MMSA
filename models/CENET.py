@@ -8,9 +8,11 @@ import math
 import math
 import sys
 from torch.nn import CrossEntropyLoss, MSELoss
-from pytorch_transformers import BertConfig
-from pytorch_transformers.modeling_utils import PreTrainedModel, prune_linear_layer
-from pytorch_transformers import BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+# from pytorch_transformers import BertConfig
+# from pytorch_transformers.modeling_utils import PreTrainedModel, prune_linear_layer
+# from pytorch_transformers import BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+from transformers import BertConfig, PreTrainedModel
+# , BERT_PRETRAINED_MODEL_ARCHIVE_MAP
 from torch.nn import LayerNorm as BertLayerNorm
 
 def gelu(x):
@@ -22,9 +24,12 @@ ACT2FN = {"gelu": gelu, "relu": torch.nn.functional.relu, "swish": swish}
 class CE(nn.Module):
     def __init__(self, config, args):
         super(CE, self).__init__()
-        TEXT_DIM = args.feature_dims[0]
-        AUDIO_DIM = args.feature_dims[1]
-        VIS_DIM = args.feature_dims[2]
+        # TEXT_DIM = args.feature_dims[0]
+        # AUDIO_DIM = args.feature_dims[1]
+        # VIS_DIM = args.feature_dims[2]
+        TEXT_DIM = args['feature_dims'][0]
+        AUDIO_DIM = args['feature_dims'][1]
+        VIS_DIM = args['feature_dims'][2]
         self.visual_transform = nn.Sequential(
             nn.Linear(VIS_DIM, config.hidden_size),
             nn.ReLU(),
@@ -355,7 +360,7 @@ class BertPreTrainedModel(PreTrainedModel):
         a simple interface for dowloading and loading pretrained models.
     """
     config_class = BertConfig
-    pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+    # pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "bert"
 
     def _init_weights(self, module):
@@ -444,7 +449,7 @@ class BertClassificationHead(nn.Module):
 
 class CENET(BertPreTrainedModel):
     config_class = BertConfig
-    pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
+    # pretrained_model_archive_map = BERT_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "bert"
     def __init__(self,config, pos_tag_embedding=False, senti_embedding=False, polarity_embedding=False,args= None):
         super(CENET, self).__init__(config)
