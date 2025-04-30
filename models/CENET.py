@@ -399,10 +399,8 @@ class BertModel(BertPreTrainedModel):
             self.encoder.layer[layer].attention.prune_heads(heads)
 
     def forward(self, input_ids, visual=None, acoustic=None, visual_ids=None, acoustic_ids=None, pos_ids=None, senti_word_ids=None, polarity_ids=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None):
-        if attention_mask is None:
-            attention_mask = torch.ones_like(input_ids)
-        if token_type_ids is None:
-            token_type_ids = torch.zeros_like(input_ids)
+        attention_mask = torch.ones_like(input_ids)
+        token_type_ids = torch.zeros_like(input_ids)
 
         extended_attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
         extended_attention_mask = extended_attention_mask.to(dtype=next(self.parameters()).dtype)
@@ -462,9 +460,12 @@ class CENET(BertPreTrainedModel):
 
     def forward(self,text, acoustic, visual, visual_ids=None, acoustic_ids=None, pos_tag_ids=None, senti_word_ids=None, polarity_ids= None, position_ids=None, head_mask= None, labels=None):
         input_ids = text[:,0,:].long()
+        input_ids = torch.clamp(input_ids, min=0)
         attention_mask =text[:,1,:].long()
         token_type_ids = text[:,2,:].long()
-        outputs = self.bert(input_ids,
+        position_ids = input_ids
+        print("Position IDs:", position_ids)
+        outputs = self.bert(input_ids=input_ids,
                             visual=visual,
                             acoustic=acoustic,
                             visual_ids=visual_ids,
