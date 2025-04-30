@@ -61,7 +61,6 @@ class CENET:
                     vision = batch_data['vision'].to(self.args['device'])
                     audio = batch_data['audio'].to(self.args['device'])
                     text = batch_data['text'].to(self.args['device'])
-                    print("Text Tensor:", text)
                     labels = batch_data['labels']['M'].to(self.args['device']).view(-1, 1)
 
                     optimizer.zero_grad()
